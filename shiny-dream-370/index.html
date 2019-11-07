@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/6.1.19/browser.min.js"></script>
+<style id="jsbin-css">
+* {
+  font-family: sans-serif;
+}
+</style>
+</head>
+<body>
+
+<!--boot js--><script id="jsbin-javascript" defer>console.clear()
+
+const MARKETING_NAMES = [
+  'NBA CANTHNY PD INJRY SLV 3',
+'SM NBA BGRFFN PAD SLVE 3 PED',
+'SM NBA CANTHNY PAD SLV 3 PED',
+'SM NBA CPAUL PAD SLEVE 3 PED',
+'SM NBA LALDRDG PAD SLVE 3 PD',
+'SM NBA LEBRON PAD SLVE 3 PED',
+'SM NBA PMLSAP SHTR SLV 3 PED',
+'SM NBA RWSTBRK PAD SLV 3 PED',
+'B NP THERMA TIGHT GFX',
+'FSP LS ALPHA NW SP GAME PANT',
+'1 CLR 2\" SHORT LW TWILL',
+'1 CLR 2\" SHORT SCREENPRINT',
+'1 CLR LIGHT WT TWILL FOOTBALL',
+'1 CLR LW STR TWILL JRSY SET',
+'1 CLR LW STR TWILL LETTR',
+'1 CLR LW STR TWILL SET',
+'1 CLR LW STR TWL NM SPLIT FRNT',
+'1 CLR LW STR TWL PANT NM',
+'1 CLR LW STR TWL SET OS',
+'1 CLR LWS TWLL CST WM BSB SF',
+'1 CLR PERF TWL 2P LSE NBR',
+'1 CLR PERF TWL 2P LSE SET',
+'1 CLR PERF TWL 4P LSE NBR',
+'1 CLR PERF TWL 4P LSE SET',
+'1 CLR PERF TWL LSE LTR',
+'1 CLR PERF TWL LSE PLYR NM PLT',
+'1 CLR PERF TWL PLYR SUB NM PLT',
+'1 CLR PERF TWL TEAM SUB NM PLT',
+'1 CLR REFL TWL 2P LSE NBR',
+'1 CLR REFL TWL 2P LSE SET',
+'1 CLR REFL TWL 4P CST NMBR',
+'1 CLR REFL TWL 4P LSE NBR',
+'1 CLR REFL TWL 4P LSE SET',
+'1 CLR REFL TWL 4P NM',
+'1 CLR REFL TWL CST WM',
+'1 CLR REFL TWL LSE LTR',
+'1 CLR REFL TWL LSE PLYR NM PLT',
+'1 CLR REFL TWL NM',
+'1 CLR REFL TWL PANT NAME',
+'1 CLR REFL TWL PLYR NM PLT',
+'1 CLR REFL TWL PLYR SUB NM PLT',
+'1 CLR REFL TWL TEAM NM PLT',
+'1 CLR REFL TWL TEAM SUB NM PLT',
+'1 CLR RFL TWL FL CST WM NM PLT',
+'1 CLR SAT TWL PLYR SUB NM PLT',
+'1 CLR SAT TWL TEAM SUB NM PLT',
+'1 CLR SB LWS TWL PRF 4P CSTNBR',
+'1 CLR SCRNPRNT COLLAR',
+'1 CLR SCRNPRNT PANT SD PNL',
+'1 CLR STD TWILL JRSY SET',
+'1 CLR STD TWILL SET',
+'1 CLR STD TWILL SET OS',
+'1 CLR STD TWL NAME SPLIT FRONT',
+'1 CLR SUB LWS TWILL PERF NM',
+'1 CLR SUB LWS TWL PERF 4P NM',
+'1 CLR SUB LWS TWL PERF CST WM',
+'1 CLR SUB PERF TWL PANT NAME',
+'1 CLR SUB SAT TWL CST WM SF',
+'1 CLR SUB SAT TWL LSE PLYR NP',
+'1 CLR SUB SATIN TWL 2P LSE NBR',
+'1 CLR SUB SATIN TWL 2P LSE SET',
+'1 CLR SUB SATIN TWL 4P CST NBR',
+'1 CLR SUB SATIN TWL 4P LSE NBR',
+'1 CLR SUB SATIN TWL 4P LSE SET',
+'1 CLR SUB SATIN TWL 4P NM',
+'1 CLR SUB SATIN TWL CST WM',
+'1 CLR SUB SATIN TWL CST WM NP',
+'1 CLR SUB SATIN TWL LSE LTR',
+'1 CLR SUB SATIN TWL NM',
+'1 CLR SUB SATIN TWL TM NM PLT',
+'1 CLR SUB SATIN TWLL PANT NAME',
+'1 CLR SUB SATN TWL PLYR NM PLT',
+'1 CLR SUBLWS TWL PERF TMNM PLT',
+'1 CLR SUBLWSTWL PERF CST WM NP',
+'1 CLR SUBLWSTWL PERF PLYRNMPLT',
+'1 CLR TWLL CST WM BSB SF',
+'1.5\" EMBRDRD NAME W NMBR',
+'1CLR LTWTSTR TWL SPLIT DIG N+N',
+'1CLR LTWTSTR TWL SPLIT DIG NME',
+'2 CLR GRAPHIC 145-500',
+'2 CLR GRAPHIC 36-72',
+'2 CLR GRAPHIC 500+',
+'2 CLR GRAPHIC 73-144',
+'2 CLR KC TWL 2P LSE NBR',
+'2 CLR KC TWL 2P LSE SET',
+'2 CLR KC TWL 4P LSE NBR',
+'2 CLR KC TWL 4P LSE SET',
+'2 CLR LIGHT WT TWILL FOOTBALL',
+'2 CLR LW STR TWILL JRSY SET',
+'2 CLR LW STR TWILL SET',
+'2 CLR LW STR TWL NM SPLIT FRNT',
+'2 CLR LW STR TWL SET OS',
+'2 CLR LWS TWL CST WM BSB SF',
+'2 CLR PERF TWL 2P LSE NBR',
+'2 CLR PERF TWL 2P LSE SET',
+'2 CLR PERF TWL 4P LSE NBR',
+'2 CLR PERF TWL 4P LSE SET',
+'2 CLR REFL KC TWL FILL 4P NM',
+'2 CLR REFL KC TWL OL 4P NM',
+'2 CLR REFL SUB TWL FILL KC NM',
+'2 CLR REFL SUB TWL OL KC NM',
+'2 CLR REFL TWL FILL 2P LSE NBR',
+'2 CLR REFL TWL FILL 2P LSE SET',
+'2 CLR REFL TWL FILL 4P LSE NBR',
+'2 CLR REFL TWL FILL 4P LSE SET',
+'2 CLR REFL TWL FILL CST WM',
+'2 CLR REFL TWL OL 2P LSE NBR',
+'2 CLR REFL TWL OL 2P LSE SET',
+'2 CLR REFL TWL OL 4P LSE NBR',
+'2 CLR REFL TWL OL 4P LSE SET',
+'2 CLR REFL TWL OL CST WM',
+'2 CLR RFL KC TWL FL 4P CST NBR',
+'2 CLR RFL KC TWL OL 4P CST NBR',
+'2 CLR SB LWS TWL PRF KC CST WM',
+'2 CLR STD TWILL JRSY SET',
+'2 CLR STD TWILL SET',
+'2 CLR STD TWILL SET OS',
+'2 CLR STD TWL CST WM BSBL',
+'2 CLR STD TWL NAME SPLIT FRONT',
+'2 CLR SUB KC TWL 4P CST NMBR',
+'2 CLR SUB KC TWL 4P NM',
+'2 CLR SUB KC TWL CST WM',
+'2 CLR SUB KC TWL NM',
+'2 CLR SUB LWS TWILL PERF KC NM',
+'2 CLR SUB LWS TWL PERFKC 4P NM',
+'2 CLR SUB SAT TWL CST WM SF',
+'2 CLR SUB SAT TWL KC 2P NM SF',
+'2 CLR SUB SAT TWL KC 4P CST NB',
+'2 CLR SUB SATIN TWL 2P LSE NBR',
+'2 CLR SUB SATIN TWL 2P LSE SET',
+'2 CLR SUB SATIN TWL 4P LSE NBR',
+'2 CLR SUB SATIN TWL 4P LSE SET',
+'2 CLR SUB SATIN TWL CST WM',
+'2 CLR SUB SATIN TWL KC 4P NM',
+'2 CLR SUB SATIN TWL NM',
+'2 CLR SUB SATIN TWL NM SF',
+'2 CLR TWL CST WM BSB SF',
+'2 CLRSUBLWSTWL PRFKC 4P CSTNBR',
+'2014 ATHLETE 3/4 KNEE PAD',
+'2016 M OLY CARGO SHORT',
+'2017 M HYPRCL TIGHT 3QT BBALL',
+'2017 NCAA  M HALF TIGHT',
+'2017 NCAA M FULL TIGHT',
+'2017 NCAA M KNIT TRACK PANT',
+'2017 NCAA M RACE SHORT',
+'2017 NCAA M RAIN PANT',
+'2017 NCAA M THROW SHORT',
+'2017 NCAA M WOVEN PANT',
+'2017 NCAA W BOY SHORT',
+'2017 NCAA W BRIEF',
+'2017 NCAA W CAPRI TIGHT',
+'2017 NCAA W FULL TIGHT',
+'2017 NCAA W HALF TIGHT',
+'2017 NCAA W KNIT TRACK PANT',
+'2017 NCAA W RACE SHORT',
+'2017 NCAA W RAIN PANT',
+'2017 NCAA W THROW SHORT',
+'2017 NCAA W WOVEN PANT',
+'23 ALPHA DRY 3/4 TIGHT TM',
+'23 ALPHA DRY KNIT SHORT TM',
+'23 ALPHA DRY PANT TM',
+'23 ALPHA DRY SS TOP TM',
+'2CLR LTWTSTR TWL SPLIT DIG N+N',
+'2CLR LTWTSTR TWL SPLIT DIG NME',
+'3 CLR KC TWL 2P LSE NBR',
+'3 CLR KC TWL 2P LSE SET',
+'3 CLR KC TWL 4P LSE NBR',
+'3 CLR KC TWL 4P LSE SET',
+'3 CLR LIGHT WT TWILL FOOTBALL',
+'3 CLR LW STR TWILL JRSY SET',
+'3 CLR LW STR TWL SET OS',
+'3 CLR PERF TWL 2P LSE NBR',
+'3 CLR PERF TWL 2P LSE SET',
+'3 CLR PERF TWL 4P LSE NBR',
+'3 CLR PERF TWL 4P LSE SET',
+'3 CLR REFL KC TWL FILL 4P NM',
+'3 CLR REFL KC TWL OL 4P NM',
+'3 CLR REFL TWL FILL 2P LSE NBR',
+'3 CLR REFL TWL FILL 2P LSE SET',
+'3 CLR REFL TWL FILL 4P LSE NBR',
+'3 CLR REFL TWL FILL 4P LSE SET',
+'3 CLR REFL TWL OL 2P LSE NBR',
+'3 CLR REFL TWL OL 2P LSE SET',
+'3 CLR REFL TWL OL 4P LSE NBR',
+'3 CLR REFL TWL OL 4P LSE SET',
+'3 CLR RFL KC TWL FL 4P CST NBR',
+]
+
+const MARKETING_NAMES_W_DUPLICATES = ['2017 NCAA W CAPRI TIGHT',
+	'2017 NCAA W FULL TIGHT',
+  '2017 NCAA W HALF TIGHT',
+  '2017 NCAA W HALF TIGHT',
+  '2017 NCAA W HALF TIGHT',
+  '2017 NCAA W HALF TIGHT',
+  '2017 NCAA W WOVEN PANT'
+]
+
+const generateRandomInteger = (boundaryOne, boundaryTwo) => {
+	let minimum, maximum;
+
+	if(boundaryOne < boundaryTwo) {
+		minimum = Math.ceil(boundaryOne);
+		maximum = Math.floor(boundaryTwo);
+	}
+	else {
+		minimum = Math.ceil(boundaryTwo);
+		maximum = Math.floor(boundaryOne);
+	}
+
+	return Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
+};
+
+
+const getRandomMarketingNameValues = (passedArr, numberOfRandomValues) => {
+	const uniqueValues = [...new Set(passedArr)];
+	const errMessage = 'You requested more random, unique values than are available in your passed array, OR you inexplicably passed a zero, try again';
+	let r = new Set();
+
+	function notSingletonMatch(item,regex, noOfMatches) {  // Needed to make ESLint happy (no-loop-func)
+		if (regex.test(item)) {
+			++noOfMatches;
+		}
+
+		return noOfMatches;
+	}
+
+	if (uniqueValues.length < numberOfRandomValues || numberOfRandomValues === 0) {
+		return errMessage;
+	}
+
+	do {
+		let matchCount = 0;
+		let i = generateRandomInteger(0, uniqueValues.length - 1);
+		let regexp = new RegExp(uniqueValues[i]); // Match on this element candidate
+
+		uniqueValues.forEach((item) => {
+			if (notSingletonMatch(item, regexp, matchCount) > 0) {
+				++matchCount;
+			}
+		});
+
+		if (matchCount > 0) { // This is NOT a singleton, therefore it is a candidate
+      r.add(uniqueValues[i]);
+		}
+		else {
+			uniqueValues.splice(i, 1); // Remove the matched value from original array and check for equivalency (i.e. array isn't large enough for requested number of random, unique values)
+			if (uniqueValues.length === r.size) {
+				return errMessage;
+			}
+
+			continue;
+	  }
+	}
+	while (r.size < numberOfRandomValues);
+
+	return [...r];
+};
+
+console.log(getRandomMarketingNameValues(MARKETING_NAMES,5))
+//console.log(getRandomMarketingNameValues(MARKETING_NAMES_W_DUPLICATES,4))
+
+</script>
+</body>
+</html>
