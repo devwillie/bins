@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+<style id="jsbin-css">
+* {
+  font-family: sans-serif;
+}
+</style>
+</head>
+<body>
+
+<!--boot js--><script id="jsbin-javascript" defer>// console.clear()
+
+// https://github.nike.com/assort-visual/av-web-workspace/pull/1775/files
+// updates_for_marketing_name_search
+// test/smoke/exclusives_smoke/exclusivesModalSmokeTest.js
+
+
+const getUniqueRandomValuesFromArray = (passedArr, numberOfRandomValues) => {
+	const uniqueValues = [...new Set(passedArr)];
+	const errMessage = 'You requested more random, unique values than are available in your passed array, try again';
+
+	if (uniqueValues.length < numberOfRandomValues) {
+		return errMessage;
+	}
+
+	let uniqueRandomVals = new Set();
+
+	do {
+	  let i = generateRandomInteger(0, uniqueValues.length - 1);
+
+	  uniqueValues.forEach(element => {
+		  uniqueRandomVals.add(uniqueValues[i]);
+		  element;
+		});
+	}
+
+	while (uniqueRandomVals.size < numberOfRandomValues);
+
+	return [...uniqueRandomVals];
+};
+</script>
+</body>
+</html>
