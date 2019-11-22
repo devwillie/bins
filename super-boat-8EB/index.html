@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/6.1.19/browser.min.js"></script>
+<style id="jsbin-css">
+* {
+  font-family: sans-serif;
+}
+</style>
+</head>
+<body>
+
+<!--boot js--><script id="jsbin-javascript" defer>console.clear()
+//const sampleValues = [1, 4, 5, 2, 'a', 'e', 'b', 'e', 2, 2, 4];
+//const uniqueValues = [...new Set(sampleValues)];
+//console.log(uniqueValues); //[1, 4, 5, 2, "a", "e", "b"]
+
+const myTestArray = [
+	"AIR MAX 90",
+	"AIR MAX 95",
+	"BRAATA",
+	"JANOSKI",
+	"KOSTON",
+	"MAVRK",
+	"MORGAN",
+	"JANOSKI MAX"
+]
+
+const myArrayWithDuplicates = [
+  "donkey",
+  "cow",
+  "donkey",
+  "cow",
+  "pig",
+  "cow",
+  "cows"
+]
+
+const generateRandomInteger = (boundaryOne, boundaryTwo) => {
+	let minimum, maximum;
+
+	if(boundaryOne < boundaryTwo) {
+		minimum = Math.ceil(boundaryOne);
+		maximum = Math.floor(boundaryTwo);
+	}
+	else {
+		minimum = Math.ceil(boundaryTwo);
+		maximum = Math.floor(boundaryOne);
+	}
+
+	return Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
+};
+
+const getRandomTypeAheadValues = (passedArr, numberOfRandomValues) => {
+	const uniqueValues = [...new Set(passedArr)];
+	const errMessage = 'You requested more random, unique values than are available in your passed array, OR you inexplicably passed a zero, try again';
+	let r = new Set();
+	let culledArray = uniqueValues.slice();
+
+	function singletonMatch(item,regex, noOfMatches) {
+		if (regex.test(item)) {
+			++noOfMatches;
+			culledArray = uniqueValues.slice(); // Restore culled array to original array of unique values
+		}
+
+		return noOfMatches;
+	}
+
+	if (uniqueValues.length < numberOfRandomValues || numberOfRandomValues === 0) {
+		return errMessage;
+	}
+
+	do {
+		let matchCount = 0;
+		let i = generateRandomInteger(0, culledArray.length - 1);
+		let regexp = new RegExp(uniqueValues[i]); // Match on this element candidate
+
+		culledArray.splice(i, 1); // NOTE: This removes value at index i from `culledArray`
+
+		culledArray.forEach((item) => {
+      if (singletonMatch(item, regexp, matchCount) > 0) {
+        ++matchCount
+      }
+    })
+
+		if (matchCount > 0) { // This is NOT a singleton, therefore it is not a candidate
+			culledArray.splice(i, 1); // Remove the matched value from original array and check for equivalency (i.e. array isn't large enough for requested number of random, unique values)
+			if (culledArray.length === r.size) {
+				return errMessage;
+			}
+
+			continue;
+		}
+		else {
+			r.add(uniqueValues[i]);
+			culledArray = uniqueValues.slice();
+	  }
+	}
+	while (r.size < numberOfRandomValues);
+
+	return [...r];
+};
+console.log(getRandomTypeAheadValues(myTestArray, 7))
+
+
+//console.log(getRandomTypeAheadValues(myArrayWithDuplicates, 4))
+
+
+</script>
+</body>
+</html>
