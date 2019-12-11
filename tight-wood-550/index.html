@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+<style id="jsbin-css">
+* {
+  font-family: sans-serif;
+}
+</style>
+</head>
+<body>
+
+<!--boot js--><script id="jsbin-javascript" defer>
+console.clear()
+
+const MARKETING_NAMES_CORRECT_VERSION = [
+	'JORDAN MAX 200',
+	'JORDAN MAX 200 BG',
+	'JORDAN MAX 200 GG',
+	'ORE M NK SPOTLIGHT SHORT',
+	'ORE M NK SPOTLIGHT SHORT SP',
+	'SAS W NK DRY TEE CTS LS',
+	'SAS W NK DRY TEE CTS LS CRW',
+];
+
+const noSubStringsArr = [
+  'ABC',
+  'DEF',
+  'GHI'
+];
+
+const getFuzzySearchFilterValues = (passedArr, numberOfRandomValues) => {
+	const uniqueValues = [...new Set(passedArr)];
+  const noResultsMessage = 'There are no options available for this fuzzy search filter'
+	let results = [];
+  let skip = [];
+  let possibleRandomIntegers = [];
+  let culledArray = uniqueValues.slice();
+
+  for (let int = 0; int <= uniqueValues.length - 1; int++) {
+    possibleRandomIntegers.push(int);
+  }
+
+	function fuzzyMatch(regex, arrayToCheck) { // Needed to make ESLint happy (no-loop-func)
+		let matchCount = 0;
+
+		for (const value of arrayToCheck) {
+			if (regex.test(value)) {
+				++matchCount;
+				break;
+			}
+		}
+		return matchCount;
+	}
+
+	do {
+		let rand = possibleRandomIntegers[Math.floor(Math.random() * possibleRandomIntegers.length)];
+		let candidate = uniqueValues[rand];
+		let regexp = new RegExp(candidate); // Match on this candidate for selection
+
+    culledArray.splice(rand, 1); // Remove the invalid candidate from target array
+    if (culledArray.length === results.length) {
+      break;
+		}
+		if (results.length === possibleRandomIntegers.length) {
+			continue;
+		}
+
+    for (let item of culledArray) {
+      	if (results.includes(candidate) || culledArray.length === results.length) {
+          item = item; // Keep linter happy
+					break;
+			}
+      if(fuzzyMatch(regexp, culledArray) > 0) {
+        results.push(candidate);  // We have a viable candidate
+      }
+      else {
+				skip.push(candidate)
+        const index = possibleRandomIntegers.findIndex(value => value === rand);
+
+				possibleRandomIntegers.splice(index, 1);
+				culledArray.splice(rand, 1); // Remove the candidate from the target array
+				culledArray = uniqueValues.slice(); // Restore culled array to original array of unique values
+				break;
+      }
+    }
+    culledArray = uniqueValues.slice(); // Restore culled array to original array of unique values
+	}	while (results.length < numberOfRandomValues);
+  
+  if (results.length === 0 || passedArr === [] || numberOfRandomValues === 0) {
+    	return noResultsMessage;
+  }
+	return results;
+};
+
+console.log(getFuzzySearchFilterValues(MARKETING_NAMES_CORRECT_VERSION, 3))
+//console.log(getFuzzySearchFilterValues(noSubStringsArr,1))
+
+</script>
+</body>
+</html>
