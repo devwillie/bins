@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+<style id="jsbin-css">
+* {
+  font-family: sans-serif;
+}
+</style>
+</head>
+<body>
+
+<!--boot js--><script id="jsbin-javascript" defer>console.clear()
+
+const levelData = {
+  GLOBAL: {
+    name: 'Global',
+    code: 1,
+    abbr: 'GLO'
+  },
+  GEOGRAPHY: {
+    name: 'Geography',
+    code: 2,
+    abbr: 'Geo'
+  },
+  COUNTRY: {
+    name: 'Country',
+    code: 3,
+    abbr: 'Cntry'
+  },
+  ACCOUNT: {
+    name: 'Customer Assortment Group',
+    code: 4, 
+    abbr: ''
+  },
+  CONCEPT: {
+    name: 'Concept',
+    code: 4,
+    abbr: ''
+  }
+};
+
+/*
+
+I needed the `name`attribute value when ‘code’ = 3 but I had no idea what the parent object key was.
+The `myFunc` function takes an object and an int  and returns a lowercase version of the Object’s ‘name’ attribute where its ‘code’ attrbute = passed int.
+*/
+const myFunc = (obj, code) => {
+  let result = ''
+  Object.values(obj).forEach(levelObj=> {
+    if (levelObj.code === code){
+      result = levelObj.name.toLowerCase()
+    }
+  })
+  return result
+}
+
+console.log(myFunc(levelData, 3))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
